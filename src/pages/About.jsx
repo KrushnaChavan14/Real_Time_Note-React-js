@@ -126,9 +126,9 @@ const About = () => {
                        style={{ width: '120px', height: '150px', objectFit: 'cover' }}
                     />
                     <h4>Shamal Bhujbal</h4>
-                    <p className="text-muted mb-3">Frontend Developer</p>
+                    <p className="text-muted mb-3">Backend Developer</p>
                     <p className="small">
-                      Specializes in React.js and UI/UX design. Focuses on creating responsive,
+                      Specializes in Node js ,React.js and UI/UX design. Focuses on creating responsive,
                       accessible, and visually appealing user interfaces.
                     </p>
                   </Card.Body>

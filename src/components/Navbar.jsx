@@ -78,6 +78,9 @@ const Navbar = () => {
           ) : (
             // Guest Navigation
             <Nav className="ms-auto">
+               <Nav.Link as={Link} to="/Dashboard" className={isActive('/Dashboard')}>
+               Home
+              </Nav.Link>
               <Nav.Link as={Link} to="/about" className={isActive('/about')}>
                 About Us
               </Nav.Link>
