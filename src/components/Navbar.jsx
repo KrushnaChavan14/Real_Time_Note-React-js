@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navbar as BootstrapNavbar, Nav, Container, NavDropdown, Badge } from 'react-bootstrap';
+import { FiEdit3, FiLogOut, FiUser } from 'react-icons/fi';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 
@@ -11,7 +12,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate('/login');
   };
 
   const isActive = (path) => {
@@ -19,10 +20,11 @@ const Navbar = () => {
   };
 
   return (
-    <BootstrapNavbar bg="primary" variant="dark" expand="lg" className="shadow-sm mb-4">
+    <BootstrapNavbar variant="dark" expand="lg" className="shadow-sm mb-4">
       <Container fluid>
-        <BootstrapNavbar.Brand as={Link} to={user ? "/dashboard" : "/"} className="fw-bold">
-          📝 Note Taking App
+        <BootstrapNavbar.Brand as={Link} to={user ? "/dashboard" : "/"} className="fw-bold d-flex align-items-center gap-2">
+          <FiEdit3 />
+          Note Taking App
         </BootstrapNavbar.Brand>
         <BootstrapNavbar.Toggle aria-controls="basic-navbar-nav" />
         <BootstrapNavbar.Collapse id="basic-navbar-nav">
@@ -49,7 +51,7 @@ const Navbar = () => {
                 <NavDropdown
                   title={
                     <span>
-                      👤 {user?.name || user?.email}
+                      <FiUser className="me-1" /> {user?.name || user?.email}
                       {isAdmin && (
                         <Badge bg="warning" text="dark" className="ms-2">
                           Admin
@@ -70,14 +72,17 @@ const Navbar = () => {
                   </NavDropdown.ItemText>
                   <NavDropdown.Divider />
                   <NavDropdown.Item onClick={handleLogout}>
-                    🚪 Logout
+                    <FiLogOut className="me-2" /> Logout
                   </NavDropdown.Item>
                 </NavDropdown>
               </Nav>
             </>
           ) : (
+
             // Guest Navigation
+            
             <Nav className="ms-auto">
+    
                <Nav.Link as={Link} to="/Dashboard" className={isActive('/Dashboard')}>
                Home
               </Nav.Link>

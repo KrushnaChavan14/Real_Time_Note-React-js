@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
+import { FiEdit2, FiFileText, FiSave } from 'react-icons/fi';
 import axios from 'axios';
 
 const EditNoteModal = ({ show, onHide, note, onNoteUpdated }) => {
@@ -59,7 +60,9 @@ const EditNoteModal = ({ show, onHide, note, onNoteUpdated }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Edit Note</Modal.Title>
+        <Modal.Title className="d-flex align-items-center gap-2">
+          <FiEdit2 className="text-primary" /> Edit Note
+        </Modal.Title>
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
@@ -70,13 +73,15 @@ const EditNoteModal = ({ show, onHide, note, onNoteUpdated }) => {
           )}
 
           <Form.Group className="mb-3">
-            <Form.Label>Title</Form.Label>
+            <Form.Label className="d-flex align-items-center gap-2">
+              <FiFileText size={16} /> Title
+            </Form.Label>
             <Form.Control
               type="text"
               name="title"
               value={formData.title}
               onChange={handleChange}
-              placeholder="Enter note title"
+              placeholder="Update your note title..."
               required
             />
           </Form.Group>
@@ -85,12 +90,13 @@ const EditNoteModal = ({ show, onHide, note, onNoteUpdated }) => {
             <Form.Label>Content</Form.Label>
             <Form.Control
               as="textarea"
-              rows={5}
+              rows={6}
               name="content"
               value={formData.content}
               onChange={handleChange}
-              placeholder="Enter note content"
+              placeholder="Update your note content..."
               required
+              style={{ resize: 'vertical', minHeight: '120px' }}
             />
           </Form.Group>
         </Modal.Body>
@@ -98,8 +104,9 @@ const EditNoteModal = ({ show, onHide, note, onNoteUpdated }) => {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" type="submit" disabled={loading}>
-            {loading ? 'Updating...' : 'Update Note'}
+          <Button variant="primary" type="submit" disabled={loading} className="px-4">
+            <FiSave className="me-2" />
+            {loading ? 'Saving Changes...' : 'Save Changes'}
           </Button>
         </Modal.Footer>
       </Form>

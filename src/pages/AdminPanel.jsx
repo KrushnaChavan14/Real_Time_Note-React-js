@@ -182,7 +182,7 @@ const AdminPanel = () => {
               <Card.Body>
                 <div className="d-flex align-items-center">
                   <div className="bg-success bg-opacity-10 rounded p-3 me-3">
-                    <span style={{ fontSize: '2rem' }}></span>
+                    <span style={{ fontSize: '2rem' }}>📝</span>
                   </div>
                   <div>
                     <h3 className="mb-0">{notes.length}</h3>
@@ -197,7 +197,7 @@ const AdminPanel = () => {
               <Card.Body>
                 <div className="d-flex align-items-center">
                   <div className="bg-danger bg-opacity-10 rounded p-3 me-3">
-                    <span style={{ fontSize: '2rem' }}></span>
+                    <span style={{ fontSize: '2rem' }}>👑</span>
                   </div>
                   <div>
                     <h3 className="mb-0">{users.filter(u => u.role === 'admin').length}</h3>
@@ -408,3 +408,4 @@ const AdminPanel = () => {
 };
 
 export default AdminPanel;
+  

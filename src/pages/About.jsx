@@ -44,7 +44,7 @@ const About = () => {
             </Card>
           </Col>
         </Row>
-{/* 
+
         <Row className="mb-5">
           <Col>
             <h2 className="text-center mb-4">Technology Stack</h2>
@@ -92,7 +92,7 @@ const About = () => {
               </Col>
             </Row>
           </Col>
-        </Row> */}
+        </Row>
 
         <Row>
           <Col>
@@ -126,9 +126,9 @@ const About = () => {
                        style={{ width: '120px', height: '150px', objectFit: 'cover' }}
                     />
                     <h4>Shamal Bhujbal</h4>
-                    <p className="text-muted mb-3">Backend Developer</p>
+                    <p className="text-muted mb-3">Frontend Developer</p>
                     <p className="small">
-                      Specializes in Node js ,React.js and UI/UX design. Focuses on creating responsive,
+                      Specializes in React.js and UI/UX design. Focuses on creating responsive,
                       accessible, and visually appealing user interfaces.
                     </p>
                   </Card.Body>

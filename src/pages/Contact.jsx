@@ -8,51 +8,59 @@ const Contact = () => {
     email: '',
     message: '',
   });
+
+  const [errors, setErrors] = useState({});
   const [alert, setAlert] = useState({ show: false, variant: '', message: '' });
   const [loading, setLoading] = useState(false);
 
+  const nameRegex = /^[A-Za-z\s]{3,}$/;
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+    setErrors((prev) => ({ ...prev, [name]: '' }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
 
-    // Validation
-    if (!formData.name || !formData.email || !formData.message) {
-      setAlert({
-        show: true,
-        variant: 'danger',
-        message: 'All fields are required',
-      });
+    const newErrors = {};
+    const { name, email, message } = formData;
+
+    if (!name.trim()) {
+      newErrors.name = 'Name is required.';
+    } else if (!nameRegex.test(name)) {
+      newErrors.name = 'Enter a valid name (letters only, min 3 characters).';
+    }
+
+    if (!email.trim()) {
+      newErrors.email = 'Email is required.';
+    } else if (!emailRegex.test(email)) {
+      newErrors.email = 'Enter a valid email address.';
+    }
+
+    if (!message.trim()) {
+      newErrors.message = 'Message is required.';
+    } else if (message.trim().length < 10) {
+      newErrors.message = 'Message should be at least 10 characters long.';
+    }
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
       setLoading(false);
       return;
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(formData.email)) {
-      setAlert({
-        show: true,
-        variant: 'danger',
-        message: 'Please enter a valid email address',
-      });
-      setLoading(false);
-      return;
-    }
-
-    // Simulate API call (non-functional for now)
     setTimeout(() => {
       setAlert({
         show: true,
         variant: 'success',
-        message: 'Thank you for your message! We will get back to you soon.',
+        message: 'Thank you for your message! We’ll get back to you soon.',
       });
       setFormData({ name: '', email: '', message: '' });
+      setErrors({});
       setLoading(false);
     }, 1000);
   };
@@ -68,8 +76,7 @@ const Contact = () => {
                 <div className="text-center mb-4">
                   <h2 className="mb-2">Contact Us</h2>
                   <p className="text-muted">
-                    Have questions? We'd love to hear from you. Send us a message and we'll respond
-                    as soon as possible.
+                    Have questions? We'd love to hear from you. Send us a message and we’ll respond as soon as possible.
                   </p>
                 </div>
 
@@ -84,7 +91,7 @@ const Contact = () => {
                   </Alert>
                 )}
 
-                <Form onSubmit={handleSubmit}>
+                <Form noValidate onSubmit={handleSubmit}>
                   <Form.Group className="mb-3">
                     <Form.Label>Name</Form.Label>
                     <Form.Control
@@ -93,20 +100,26 @@ const Contact = () => {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Enter your name"
-                      required
+                      isInvalid={!!errors.name}
                     />
+                    {errors.name && (
+                      <Form.Text className="text-danger">{errors.name}</Form.Text>
+                    )}
                   </Form.Group>
 
                   <Form.Group className="mb-3">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
-                      type="email"
+                      type="text"
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="Enter your email"
-                      required
+                      isInvalid={!!errors.email}
                     />
+                    {errors.email && (
+                      <Form.Text className="text-danger">{errors.email}</Form.Text>
+                    )}
                   </Form.Group>
 
                   <Form.Group className="mb-3">
@@ -118,16 +131,14 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Enter your message"
-                      required
+                      isInvalid={!!errors.message}
                     />
+                    {errors.message && (
+                      <Form.Text className="text-danger">{errors.message}</Form.Text>
+                    )}
                   </Form.Group>
 
-                  <Button
-                    variant="primary"
-                    type="submit"
-                    className="w-100"
-                    disabled={loading}
-                  >
+                  <Button variant="primary" type="submit" className="w-100" disabled={loading}>
                     {loading ? 'Sending...' : 'Send Message'}
                   </Button>
                 </Form>
@@ -145,19 +156,20 @@ const Contact = () => {
                 <h5 className="mb-3">Other Ways to Reach Us</h5>
                 <Row>
                   <Col xs={12} sm={4} className="text-center mb-3 mb-sm-0">
-                    <div style={{ fontSize: '2rem' }}></div>
                     <strong>Email</strong>
                     <p className="small mb-0">support@noteapp.com</p>
                   </Col>
                   <Col xs={12} sm={4} className="text-center mb-3 mb-sm-0">
-                    <div style={{ fontSize: '2rem' }}></div>
                     <strong>Phone</strong>
                     <p className="small mb-0">+91 9545151536</p>
                   </Col>
                   <Col xs={12} sm={4} className="text-center">
-                    <div style={{ fontSize: '2rem' }}></div>
                     <strong>Address</strong>
-                    <p className="small mb-0">CDAC<br />Khargar</p>
+                    <p className="small mb-0">
+                      CDAC
+                      <br />
+                      Kharghar
+                    </p>
                   </Col>
                 </Row>
               </Card.Body>
@@ -170,4 +182,3 @@ const Contact = () => {
 };
 
 export default Contact;
-

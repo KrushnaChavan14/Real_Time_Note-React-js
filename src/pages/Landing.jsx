@@ -12,7 +12,7 @@ const Landing = () => {
         <Row className="mb-5 py-5">
           <Col className="text-center">
             <h1 className="display-3 fw-bold text-primary mb-4">
-               Welcome to Note Taking App
+              📝 Welcome to Note Taking App
             </h1>
             <p className="lead text-muted mb-4" style={{ maxWidth: '600px', margin: '0 auto' }}>
               Organize your thoughts, capture your ideas, and never forget important information. 
@@ -39,7 +39,7 @@ const Landing = () => {
           <Col md={4}>
             <Card className="h-100 shadow-sm border-0 text-center">
               <Card.Body className="p-4">
-                <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}></div>
+                <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>🔐</div>
                 <Card.Title className="h4 mb-3">Secure & Private</Card.Title>
                 <Card.Text className="text-muted">
                   Your notes are encrypted and secure. Only you have access to your personal notes 
@@ -51,7 +51,7 @@ const Landing = () => {
           <Col md={4}>
             <Card className="h-100 shadow-sm border-0 text-center">
               <Card.Body className="p-4">
-                <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}></div>
+                <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>⚡</div>
                 <Card.Title className="h4 mb-3">Fast & Responsive</Card.Title>
                 <Card.Text className="text-muted">
                   Built with modern technology for lightning-fast performance. Access your notes 
@@ -63,7 +63,7 @@ const Landing = () => {
           <Col md={4}>
             <Card className="h-100 shadow-sm border-0 text-center">
               <Card.Body className="p-4">
-                <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}></div>
+                <div style={{ fontSize: '3.5rem', marginBottom: '1rem' }}>📱</div>
                 <Card.Title className="h4 mb-3">Accessible Everywhere</Card.Title>
                 <Card.Text className="text-muted">
                   Responsive design means your notes look great on desktop, tablet, or mobile. 
@@ -162,7 +162,7 @@ const Landing = () => {
           </Col>
         </Row>
 
-        {/* Call to Action
+        {/* Call to Action */}
         <Row>
           <Col className="text-center">
             <Card className="border-0 shadow-lg" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white' }}>
@@ -177,7 +177,7 @@ const Landing = () => {
               </Card.Body>
             </Card>
           </Col>
-        </Row> */}
+        </Row>
       </Container>
     </>
   );

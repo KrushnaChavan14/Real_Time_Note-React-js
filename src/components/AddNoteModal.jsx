@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Form, Alert } from 'react-bootstrap';
+import { FiPlus, FiFileText } from 'react-icons/fi';
 import axios from 'axios';
 
 const AddNoteModal = ({ show, onHide, onNoteAdded }) => {
@@ -19,7 +20,7 @@ const AddNoteModal = ({ show, onHide, onNoteAdded }) => {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    e.preventDefault();//
     setError('');
     
     if (!formData.title.trim() || !formData.content.trim()) {
@@ -50,7 +51,9 @@ const AddNoteModal = ({ show, onHide, onNoteAdded }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Add New Note</Modal.Title>
+        <Modal.Title className="d-flex align-items-center gap-2">
+          <FiPlus className="text-primary" /> Add New Note
+        </Modal.Title>
       </Modal.Header>
       <Form onSubmit={handleSubmit}>
         <Modal.Body>
@@ -61,13 +64,15 @@ const AddNoteModal = ({ show, onHide, onNoteAdded }) => {
           )}
 
           <Form.Group className="mb-3">
-            <Form.Label>Title</Form.Label>
+            <Form.Label className="d-flex align-items-center gap-2">
+              <FiFileText size={16} /> Title
+            </Form.Label>
             <Form.Control
               type="text"
               name="title"
               value={formData.title}
               onChange={handleChange}
-              placeholder="Enter note title"
+              placeholder="Give your note a descriptive title..."
               required
             />
           </Form.Group>
@@ -76,12 +81,13 @@ const AddNoteModal = ({ show, onHide, onNoteAdded }) => {
             <Form.Label>Content</Form.Label>
             <Form.Control
               as="textarea"
-              rows={5}
+              rows={6}
               name="content"
               value={formData.content}
               onChange={handleChange}
-              placeholder="Enter note content"
+              placeholder="Write your thoughts, ideas, or notes here..."
               required
+              style={{ resize: 'vertical', minHeight: '120px' }}
             />
           </Form.Group>
         </Modal.Body>
@@ -89,8 +95,9 @@ const AddNoteModal = ({ show, onHide, onNoteAdded }) => {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="primary" type="submit" disabled={loading}>
-            {loading ? 'Adding...' : 'Add Note'}
+          <Button variant="primary" type="submit" disabled={loading} className="px-4">
+            <FiPlus className="me-2" />
+            {loading ? 'Creating Note...' : 'Create Note'}
           </Button>
         </Modal.Footer>
       </Form>

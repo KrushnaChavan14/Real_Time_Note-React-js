@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Modal, Button, Alert } from 'react-bootstrap';
+import { FiTrash2, FiAlertTriangle } from 'react-icons/fi';
 import axios from 'axios';
 
 const DeleteNoteModal = ({ show, onHide, note, onNoteDeleted }) => {
@@ -30,7 +31,9 @@ const DeleteNoteModal = ({ show, onHide, note, onNoteDeleted }) => {
   return (
     <Modal show={show} onHide={handleClose} centered>
       <Modal.Header closeButton>
-        <Modal.Title>Delete Note</Modal.Title>
+        <Modal.Title className="d-flex align-items-center gap-2 text-danger">
+          <FiTrash2 /> Delete Note
+        </Modal.Title>
       </Modal.Header>
       <Modal.Body>
         {error && (
@@ -39,24 +42,36 @@ const DeleteNoteModal = ({ show, onHide, note, onNoteDeleted }) => {
           </Alert>
         )}
 
-        <p>Are you sure you want to delete this note?</p>
-        <div className="border p-3 rounded bg-light">
-          <strong>{note.title}</strong>
-          <p className="text-muted mb-0 mt-2">
-            {note.content.substring(0, 100)}
-            {note.content.length > 100 ? '...' : ''}
+        <div className="text-center mb-3">
+          <div className="text-warning mb-3" style={{ fontSize: '3rem' }}>
+            <FiAlertTriangle />
+          </div>
+          <p className="fs-5 mb-3">Are you sure you want to delete this note?</p>
+        </div>
+        
+        <div className="border p-3 rounded" style={{ backgroundColor: 'var(--accent)' }}>
+          <div className="d-flex align-items-start gap-2 mb-2">
+            <FiTrash2 className="text-muted mt-1" size={16} />
+            <strong className="text-dark">{note.title}</strong>
+          </div>
+          <p className="text-muted mb-0 ms-4" style={{ fontSize: '0.9rem' }}>
+            {note.content.substring(0, 120)}
+            {note.content.length > 120 ? '...' : ''}
           </p>
         </div>
-        <p className="mt-3 text-danger">
-          <small>This action cannot be undone.</small>
-        </p>
+        
+        <div className="alert alert-danger mt-3 d-flex align-items-center gap-2" style={{ fontSize: '0.9rem' }}>
+          <FiAlertTriangle size={16} />
+          <span>This action cannot be undone.</span>
+        </div>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={handleClose} disabled={loading}>
           No, Cancel
         </Button>
-        <Button variant="danger" onClick={handleDelete} disabled={loading}>
-          {loading ? 'Deleting...' : 'Yes, Delete'}
+        <Button variant="danger" onClick={handleDelete} disabled={loading} className="px-4">
+          <FiTrash2 className="me-2" />
+          {loading ? 'Deleting...' : 'Yes, Delete Note'}
         </Button>
       </Modal.Footer>
     </Modal>
